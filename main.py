@@ -31,6 +31,7 @@ time.tzset()
 time.strftime('%X %x %Z')
 
 # Setting working directory
+os.chdir("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
 base_path = os.getcwd()
 
 # build dictionary
