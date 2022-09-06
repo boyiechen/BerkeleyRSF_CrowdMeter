@@ -5,34 +5,19 @@
 # packages
 import requests
 from bs4 import BeautifulSoup
-# from selenium import webdriver
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.support.ui import Select
 import pandas as pd
-# import numpy as np
 import time
-# import re
 import datetime
-# import sqlite3 as lite
 import os
-# import random
 import calendar
-
-# import matplotlib
-#matplotlib.use('Agg')
-
 import matplotlib.pyplot as plt
-
 import matplotlib.ticker as ticker
-# from pprint import pprint
 import pyimgur
 from config import headers, weather_url, CLIENT_ID, token
 
 # UC Berkeley RSF data
 ## directly scrape XHR file
 url = "https://api.density.io/v2/displays/dsp_956223069054042646"
-
 res = requests.get(url, headers = headers)
 XHR_dict = res.json()
 current_count = XHR_dict["dedicated_space"]["current_count"]
@@ -47,13 +32,6 @@ time.strftime('%X %x %Z')
 
 # Setting working directory
 base_path = os.getcwd()
-# base_path = "/home/ubuntu/Python_Codes/RSF"
-
-# print(current_count)
-# print(capacity_full)
-# print(f"ratio = {current_count / capacity_full}")
-# print(capacity)
-
 
 # build dictionary
 count_dict = {}
@@ -76,22 +54,17 @@ colnam = list(count_dict.keys())
 # build dataframe
 tmp = pd.DataFrame.from_dict([count_dict])
 tmp = tmp.set_index("Timestamp")
-# tmp.to_csv(f"/home/ubuntu/Python_Codes/RSF/RSF_tmp.csv")
 tmp.to_csv(f"{base_path}/RSF_tmp.csv")
 
 # Loading and Updating
-# df = pd.read_csv(f"/home/ubuntu/Python_Codes/RSF/RSF_crowd_meter.csv", index_col="Timestamp")
 df = pd.read_csv(f"{base_path}/RSF_crowd_meter.csv", index_col="Timestamp")
 df = df.append(tmp)
 df = df.sort_values(by = "Timestamp", ascending = False)
 
 # Saving
-# df.to_csv(f"/home/ubuntu/Python_Codes/RSF/RSF_crowd_meter.csv")
 df.to_csv(f"{base_path}/RSF_crowd_meter.csv")
-# df.to_csv(f"/var/www/html/img/RSF_crowd_meter.csv")
 
 # Modeling and Data Manipulation
-# df = pd.read_csv(f"/home/ubuntu/Python_Codes/RSF/RSF_crowd_meter.csv")
 df = pd.read_csv(f"{base_path}/RSF_crowd_meter.csv")
 
 # Find the 15-min intervals
@@ -110,12 +83,7 @@ df["TimeInterval"] = df.iloc[0:len(df),0].map(lambda x:findTimeInterval(x))
 def findDay(date): 
     born = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M').weekday() 
     return (calendar.day_name[born])
-
 date_text = df.iloc[0:len(df),0][0]
-print(date_text)
-print(findDay(date_text)) 
-
-# equivalent to column 1: date
 df["WeekDay"] = df.iloc[0:len(df),0].map(lambda x:findDay(x))
 WeekDayToday = datetime.datetime.today().weekday()
 WeekDayDict = {
