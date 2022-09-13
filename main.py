@@ -34,6 +34,8 @@ time.strftime('%X %x %Z')
 os.chdir("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
 base_path = os.getcwd()
 
+now = datetime.datetime.today()
+
 # build dictionary
 count_dict = {}
 count_dict["current_count"] = current_count
@@ -127,16 +129,18 @@ def sendNotification(text = "", img_url = "", token = ""):
     print("發送Line通知囉！")
     time.sleep(1)
 
-# Uploading plots to Imgur
-PATH = f"{base_path}/plot/plot.jpg"
-title = "Uploaded with PyImgur"
-im = pyimgur.Imgur(CLIENT_ID)
-uploaded_image = im.upload_image(PATH, title=title)
-print(uploaded_image.title)
-print(uploaded_image.link)
-print(uploaded_image.type)
+# if it is a new hour, then send notification
+if now.minute % 30 == 0:
+    # Uploading plots to Imgur
+    PATH = f"{base_path}/plot/plot.jpg"
+    title = "Uploaded with PyImgur"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    print(uploaded_image.title)
+    print(uploaded_image.link)
+    print(uploaded_image.type)
 
-key = 'current_count'
-sendNotification(text = f"\nUC Berkeley RSF\n資料抓取時刻：\n{count_dict['Timestamp']}\n{key} : {count_dict[key]}人\n人數上限：{count_dict['capacity_fulll']}人\n容留比例：{count_dict['capacity_ratio']}\n現在氣溫：攝氏{count_dict['temp']}\n體感溫度：攝氏{count_dict['temp_feel']}\n現在濕度：{count_dict['humidity']}%\n現在氣壓：{count_dict['pressure']}帕", 
-                 img_url = uploaded_image.link,
-                 token = token)
+    key = 'current_count'
+    sendNotification(text = f"\nUC Berkeley RSF\n資料抓取時刻：\n{count_dict['Timestamp']}\n{key} : {count_dict[key]}人\n人數上限：{count_dict['capacity_fulll']}人\n容留比例：{count_dict['capacity_ratio']}\n現在氣溫：攝氏{count_dict['temp']}\n體感溫度：攝氏{count_dict['temp_feel']}\n現在濕度：{count_dict['humidity']}%\n現在氣壓：{count_dict['pressure']}帕", 
+                    img_url = uploaded_image.link,
+                    token = token)
