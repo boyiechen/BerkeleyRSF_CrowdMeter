@@ -9,6 +9,7 @@ import pandas as pd
 import time
 import datetime
 import os
+import sys
 import calendar
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -58,6 +59,11 @@ colnam = list(count_dict.keys())
 tmp = pd.DataFrame.from_dict([count_dict])
 tmp = tmp.set_index("Timestamp")
 tmp.to_csv(f"{base_path}/RSF_tmp.csv")
+# print("shape is :", tmp.shape[0])
+if tmp.shape[0] == 0:
+    print("NO DATA, EXIT PROGRAM")
+    sys.exit()
+    
 
 # Loading and Updating
 df = pd.read_csv(f"{base_path}/RSF_crowd_meter.csv", index_col="Timestamp")
