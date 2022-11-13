@@ -6,7 +6,8 @@ cursor = conn.cursor()
 cursor.execute("SELECT * FROM db;")
 
 records = cursor.fetchall()
-print(records)
+for record in records:
+    print(record)
 
 cursor.close()
 conn.close()
