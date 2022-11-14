@@ -21,7 +21,7 @@ base_path = os.getcwd()
 print(base_path)
 
 # Initialize DB connection
-db_manager = DBManager(database='./db.sqlite')
+db_manager = DBManager(database='./database.db')
 
 # Test the functionality of scrape new data, save in DB
 ## load old data

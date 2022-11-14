@@ -1,1 +1,2 @@
 db.sqlite filter=lfs diff=lfs merge=lfs -text
+database.db filter=lfs diff=lfs merge=lfs -text
