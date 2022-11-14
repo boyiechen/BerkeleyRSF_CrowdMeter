@@ -28,7 +28,7 @@ now = datetime.datetime.today()
 
 class scraper(object):
 
-    def __init__(self, headers, weather_url):
+    def __init__(self, headers = headers, weather_url = weather_url):
         self.url = "https://api.density.io/v2/displays/dsp_956223069054042646"
         self.headers = headers
         self.weather_url = weather_url
