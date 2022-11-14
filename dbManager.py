@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 
 class DBManager:
-    def __init__(self, database = "./database.db"):
+    def __init__(self, database = "./database"):
         self.conn = sqlite3.connect(database)
         self.cursor = self.conn.cursor()
 
@@ -28,7 +28,7 @@ class DBManager:
         return df
 
 
-db_manager = DBManager(database='./database.db')
+db_manager = DBManager(database='./database')
 
 if __name__ == "__main__":
     # load old data
