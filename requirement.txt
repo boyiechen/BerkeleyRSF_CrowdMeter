@@ -1,3 +1,0 @@
-pyimgur
-pandas
-matplotlib

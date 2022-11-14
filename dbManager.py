@@ -24,7 +24,7 @@ class DBManager:
 
     def loadData(self, table_name = 'db'):
         df = pd.read_sql_query(f"SELECT * FROM {table_name}", self.conn)
-        print(df.info)
+        # print(df.info)
         return df
 
 

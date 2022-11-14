@@ -5,22 +5,7 @@ import time
 import datetime
 import os
 import sys
-from config import headers, weather_url, CLIENT_ID, token
-
-
-# Set timezone
-time.strftime('%X %x %Z')
-os.environ['TZ'] = 'US/Pacific'
-time.tzset()
-time.strftime('%X %x %Z')
-
-# Setting working directory
-# os.chdir("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
-base_path = os.getcwd()
-
-now = datetime.datetime.today()
-
-
+from config import headers, weather_url 
 
 class scraper(object):
 
@@ -69,4 +54,3 @@ class scraper(object):
         self.count_dict["temp_max"] = weather_res["main"]["temp_max"]
         self.count_dict["pressure"] = weather_res["main"]["pressure"]
         self.count_dict["humidity"] = weather_res["main"]["humidity"]
-

@@ -8,7 +8,6 @@ import pyimgur
 
 from dbManager import DBManager
 from config import CLIENT_ID, token
-# from scrapeData import scraper
 
 class Analyzer:
     def __init__(self):
