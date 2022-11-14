@@ -36,12 +36,11 @@ class scraper(object):
         XHR_dict = res.json()
         current_count = XHR_dict["dedicated_space"]["current_count"]
         capacity_full = XHR_dict["dedicated_space"]["capacity"]
-        # capacity = current_count / capacity_full
         
         # build dictionary
         self.count_dict["current_count"] = current_count
         self.count_dict["capacity_fulll"] = capacity_full
-        self.count_dict["capacity_ratio"] = current_count / capacity_full
+        self.count_dict["capacity_ratio"] = round(current_count / capacity_full, 4)
         self.count_dict["Timestamp"] = datetime.datetime.today().strftime("%Y-%m-%d %H:%M")
 
     def fetchWeatherNow(self):
