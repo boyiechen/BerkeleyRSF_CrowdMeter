@@ -16,14 +16,14 @@ class DBManager:
         df_scraped.to_sql(name = 'db', con = self.conn, if_exists = 'append')
     
     def showData(self, table_name = 'db', limit = 10):
-        self.cursor.execute(f"SELECT * FROM {table_name} LIMIT {limit}")
+        self.cursor.execute(f"SELECT * FROM `{table_name}` LIMIT {limit}")
 
         values = self.cursor.fetchall()
         for student in values:
             print(student)
 
     def loadData(self, table_name = 'db'):
-        df = pd.read_sql_query(f"SELECT * FROM {table_name}", self.conn)
+        df = pd.read_sql_query(f"SELECT * FROM `{table_name}`", self.conn)
         # print(df.info)
         return df
 
