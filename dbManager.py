@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 
 class DBManager:
-    def __init__(self, database = "./db.squlite"):
+    def __init__(self, database = "./db.sqlite"):
         self.conn = sqlite3.connect(database)
         self.cursor = self.conn.cursor()
 
