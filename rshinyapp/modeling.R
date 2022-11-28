@@ -18,7 +18,8 @@ library(RSQLite)
 # Set up env
 Sys.setenv(TZ='US/Pacific')
 # as.POSIXct(tz = "US/Pacific")
-setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
+# setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
+setwd("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
 source("rshinyapp/functions.R")
 
 # Build up DB connection

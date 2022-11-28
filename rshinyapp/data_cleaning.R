@@ -14,8 +14,8 @@ library(RSQLite)
 
 # Set up env
 Sys.setenv(TZ='US/Pacific')
-setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
-
+#setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
+setwd("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
 # Build up DB connection
 conn <- dbConnect(drv = RSQLite::SQLite(), dbname = "database")
 rawdata <- dbReadTable(conn, "db")
