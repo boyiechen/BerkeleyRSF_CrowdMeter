@@ -9,6 +9,7 @@ rm(list = ls())
 
 # Dependencies
 library(dplyr)
+library(readr)
 library(ggplot2)
 library(lubridate)
 library(tidymodels)
@@ -18,8 +19,9 @@ library(RSQLite)
 # Set up env
 Sys.setenv(TZ='US/Pacific')
 # as.POSIXct(tz = "US/Pacific")
-# setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
-setwd("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
+#setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
+#setwd("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
+setwd("C:/Users/boyie/Programming/BerkeleyRSF_CrowdMeter")
 source("rshinyapp/functions.R")
 
 # Build up DB connection
