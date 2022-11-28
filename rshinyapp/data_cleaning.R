@@ -8,6 +8,7 @@
 rm(list = ls())
 
 # Dependencies
+library(readr)
 library(dplyr, warn.conflicts = FALSE)
 library(lubridate)
 library(RSQLite)
@@ -62,3 +63,7 @@ df <- df %>% mutate(by5 = as.character(by5), by15 = as.character(by15))
 dbWriteTable(conn, name = "cleanedData", value = df, overwrite = TRUE)
 # dbListTables(conn)
 # dbReadTable(conn, "cleanedData")
+
+# Save csv
+write_csv(df, file = "rshinyapp/cleanedData.csv")
+

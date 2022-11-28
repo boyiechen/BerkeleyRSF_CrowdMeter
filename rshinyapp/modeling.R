@@ -172,3 +172,5 @@ df_outcome_plot <- df_outcome_plot %>%
   mutate(by5 = as.character(by5))
 dbWriteTable(conn, name = "reportData", value = df_outcome_plot, overwrite = TRUE)
 
+# Save csv
+write_csv(df_outcome_plot, file = "rshinyapp/reportData.csv")

@@ -7,7 +7,8 @@ pkgLoad <- function( packages = "requirements" ) {
                    "RSQLite",
                    "tidymodels",
                    "poissonreg",
-                   "ggplot2"
+                   "ggplot2",
+                   "readr"
                    )
   }
   
