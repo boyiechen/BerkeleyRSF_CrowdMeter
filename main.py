@@ -16,13 +16,13 @@ time.strftime('%X %x %Z')
 now = datetime.datetime.today()
 
 # Setting working directory
-os.chdir("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
+os.chdir("/home/pi/repo/BerkeleyRSF_CrowdMeter/")
 base_path = os.getcwd()
 print(base_path)
 
 # Initialize DB connection
 db_manager = DBManager(database='./database')
-db_manager_backup = DBManager(database='/home/rpi/repo/database/UCB_RSF')
+#db_manager_backup = DBManager(database='/home/pi/repo/database/UCB_RSF')
 
 # Test the functionality of scrape new data, save in DB
 ## load old data
@@ -37,7 +37,7 @@ print(df_tmp)
 
 ## insert new data
 db_manager.insertData(df_tmp)
-db_manager_backup.insertData(df_tmp)
+#db_manager_backup.insertData(df_tmp)
 
 ## load new data
 # db_manager.showData("db", limit=10)

@@ -29,7 +29,7 @@ class DBManager:
 
 
 db_manager = DBManager(database='./database')
-#db_manager_backup = DBManager(database='/home/rpi/repo/database/UCB_RSF')
+#db_manager_backup = DBManager(database='/home/pi/repo/database/UCB_RSF')
 
 if __name__ == "__main__":
     # load old data

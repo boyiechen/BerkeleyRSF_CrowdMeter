@@ -20,7 +20,7 @@ library(RSQLite)
 Sys.setenv(TZ='US/Pacific')
 # as.POSIXct(tz = "US/Pacific")
 #setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
-setwd("/home/rpi/repo/BerkeleyRSF_CrowdMeter/")
+setwd("/home/pi/repo/BerkeleyRSF_CrowdMeter/")
 #setwd("C:/Users/boyie/Programming/BerkeleyRSF_CrowdMeter")
 source("rshinyapp/functions.R")
 
@@ -36,6 +36,8 @@ df <- df %>%
          by15 = lubridate::ymd_hms(by15))
 
 #####----- Modeling -----#####
+# timer
+t0 <- Sys.time()
 # using tidy model
 df_model <- df %>% 
   mutate(weekday = as.factor(weekday),
@@ -169,6 +171,8 @@ df_outcome_plot <- df_outcome %>%
                         .pred - 1.96*sd(err_lm),
                         NA)
          )
+t1 <- Sys.time()
+print(format(t1 - t0))
 
 # Write cleaned data
 df_outcome_plot <- df_outcome_plot %>% 
