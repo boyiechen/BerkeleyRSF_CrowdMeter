@@ -16,7 +16,7 @@ time.strftime('%X %x %Z')
 now = datetime.datetime.today()
 
 # Setting working directory
-os.chdir("/home/pi/repo/BerkeleyRSF_CrowdMeter/")
+os.chdir("/home/boyie/repo/BerkeleyRSF_CrowdMeter/")
 base_path = os.getcwd()
 print(base_path)
 
