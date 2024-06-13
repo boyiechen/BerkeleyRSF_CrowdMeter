@@ -4,8 +4,9 @@
 #' The following script model the people count provided by scrawling the crowd meter
 #' And by utilizing the model parameter, I provide the real time prediction
 
-# clean up env
-rm(list = ls())
+# set up env
+source("./config.R")
+source("./rshinyapp/functions.R")
 
 # Dependencies
 library(dplyr)
@@ -16,13 +17,6 @@ library(tidymodels)
 library(poissonreg) # apply glm engine for poisson reg
 library(RSQLite)
 
-# Set up env
-Sys.setenv(TZ='US/Pacific')
-# as.POSIXct(tz = "US/Pacific")
-#setwd("/Users/Andy 1/google_drive/Coding_Projects/RSF/repo")
-setwd("/home/boyie/repo/BerkeleyRSF_CrowdMeter/")
-#setwd("C:/Users/boyie/Programming/BerkeleyRSF_CrowdMeter")
-source("rshinyapp/functions.R")
 
 # Build up DB connection
 conn <- dbConnect(drv = RSQLite::SQLite(), dbname = "database")

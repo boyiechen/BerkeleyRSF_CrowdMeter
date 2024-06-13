@@ -110,7 +110,7 @@ server <- function(input, output) {
                 # Add a second axis and specify its features
                 sec.axis = sec_axis(~./2, name="Temperature (ºC)")
             )+
-            labs(title = paste0("Number of people in NTU GYM: past ", input$wday, "s"))
+            labs(title = paste0("Number of people in Berkeley RSF: past ", input$wday, "s"))
     })
 
     output$Plot_TODAY <- renderPlot({
@@ -129,7 +129,7 @@ server <- function(input, output) {
                 # Add a second axis and specify its features
                 sec.axis = sec_axis(~./2, name="Temperature (ºC)")
             )+
-            labs(title = "Number of people in NTU GYM, Today")
+            labs(title = "Number of people in Berkeley RSF, Today")
     })
     
     ### For the second tab of the main panel
