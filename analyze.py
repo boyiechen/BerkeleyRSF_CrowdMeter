@@ -41,8 +41,9 @@ class Analyzer:
 
 
 
-    def filterWeekDayDF(self):
-        df = DBManager().loadData(table_name = 'db')
+    def filterWeekDayDF(self, df = None):
+        if df is None: # then load the default dataframe from SQLite database
+            df = DBManager().loadData(table_name = 'db')
         df = df.sort_values(by = "Timestamp", ascending = False)
         
         # Modeling and Data Manipulation
@@ -55,7 +56,9 @@ class Analyzer:
 
         # Filter the samples that match today's weekday
         df_wk2day = df[df["WeekDay"] == self.WeekDayDict[self.WeekDayToday]]
-        df_wk2day = df_wk2day.groupby("TimeInterval").mean()
+        # df_wk2day = df_wk2day.groupby("TimeInterval").mean()
+        # the above line is about to deprecated, and the following line is the new one
+        df_wk2day = df_wk2day.groupby("TimeInterval").agg({'current_count':'mean', 'capacity_fulll':'mean', 'capacity_ratio':'mean', 'temp':'mean', 'temp_feel':'mean', 'humidity':'mean', 'pressure':'mean'}).reset_index()
 
         return df_wk2day
 

@@ -1,55 +1,41 @@
-# packages
+"""
+Berkeley RSF Crowd Meter
+"""
 import time
 import datetime
 import os
 
 # Load self-defined modules
+from config import *
 import scrapeData
 from dbManager import DBManager
 from analyze import Analyzer
 
-# Set timezone
-time.strftime('%X %x %Z')
-os.environ['TZ'] = 'US/Pacific'
-time.tzset()
-time.strftime('%X %x %Z')
+# Get the current time, to have a timestamp for the scraped record
 now = datetime.datetime.today()
-
-# Setting working directory
-os.chdir("/home/boyie/repo/BerkeleyRSF_CrowdMeter/")
-base_path = os.getcwd()
-print(base_path)
-
-# Initialize DB connection
-db_manager = DBManager(database='./database')
-#db_manager_backup = DBManager(database='/home/pi/repo/database/UCB_RSF')
-
-# Test the functionality of scrape new data, save in DB
-## load old data
-# db_manager.showData("db", limit=10)
-df = db_manager.loadData()
-print(df.shape)
 
 ## scrape new data (in type of pandas df)
 scraper = scrapeData.scraper()
 df_tmp = scraper.getCrowdMeterDF()
 print(df_tmp)
 
-## insert new data
-db_manager.insertData(df_tmp)
-#db_manager_backup.insertData(df_tmp)
+# Initialize SQLite DB connection
+db_manager = DBManager(database='./database')
 
-## load new data
-# db_manager.showData("db", limit=10)
+# scrape new data, and then save in DB
 df = db_manager.loadData()
-print(df.shape)
+# insert new data
+db_manager.insertData(df_tmp)
 
+# load new data
+df = db_manager.loadData()
+print(df)
 
 # Analysis
 analysis = Analyzer()
 
 ## data cleaning
-df_wk2day = analysis.filterWeekDayDF()
+df_wk2day = analysis.filterWeekDayDF(df)
 ## create plot
 analysis.makeWeekDayPlot(df_wk2day, base_path)
 
