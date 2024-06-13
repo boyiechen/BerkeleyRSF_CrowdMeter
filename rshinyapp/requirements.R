@@ -8,7 +8,8 @@ pkgLoad <- function( packages = "requirements" ) {
                    "tidymodels",
                    "poissonreg",
                    "ggplot2",
-                   "readr"
+                   "readr",
+                   "GGally"
                    )
   }
   
