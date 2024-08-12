@@ -25,35 +25,32 @@ df <- rawdata %>%
   # Create weekday
   # 1: Sun., 2: Mon., ..., 6: Sat.
   mutate(weekday = lubridate::wday(Timestamp)) %>% 
-  ## making the data as 300 seconds time frequency, i.e. 5-min interval
+  # Arrange by Timestamp
   arrange(Timestamp) %>% 
-  mutate(by15 = cut(Timestamp, "15 min")) %>%
-  # make the data in 5 min freq
+  # Create 15-min intervals
+  mutate(by15 = cut(Timestamp, "15 min")) %>% 
+  # Group by 5-min intervals
   group_by(by5 = cut(Timestamp, "5 min")) %>% 
-  # collapse the data in 5 min interval
-  summarise(count = mean(current_count),
-            ratio = mean(capacity_ratio),
-            temp = mean(temp),
-            temp_feel = mean(temp_feel),
-            temp_min = mean(temp_min),
-            temp_max = mean(temp_max),
-            pressure = mean(pressure),
-            humidity = mean(humidity),
-            weekday = head(weekday, 1),
-            by15 = head(by15, 1),
-            ) %>% 
-  # create dummies
-  # mutate(by5 = as.POSIXct(by5)) %>% 
-  mutate(by5 = lubridate::ymd_hms(by5)) %>% 
-  mutate(hour = lubridate::hour(by5),
-         minute = lubridate::minute(by5),) %>% 
-  # create dummies
-  # mutate(by15 = as.POSIXct(by15)) %>% 
-  mutate(by15 = lubridate::ymd_hms(by15)) %>% 
-  mutate(minute15 = lubridate::minute(by15),) %>% 
-  # if `count` less than 10, then assign 0
-  mutate(count = ifelse(count<=10, 0, count))
-
+  # Summarise data by 5-min intervals
+  summarise(
+    count = mean(current_count),
+    ratio = mean(capacity_ratio),
+    temp = mean(temp),
+    temp_feel = mean(temp_feel),
+    temp_min = mean(temp_min),
+    temp_max = mean(temp_max),
+    pressure = mean(pressure),
+    humidity = mean(humidity),
+    weekday = first(weekday),
+    by15 = first(by15)
+  ) %>% 
+  # Convert `by5` and `by15` to POSIXct date-time format
+  mutate(
+    by5 = as.POSIXct(by5, format="%Y-%m-%d %H:%M:%S"),
+    by15 = as.POSIXct(by15, format="%Y-%m-%d %H:%M:%S")
+  ) %>% 
+  # Apply additional transformations
+  mutate(count = ifelse(count <= 10, 0, count))
 
 
 # Fill missing 15-minute time intervals

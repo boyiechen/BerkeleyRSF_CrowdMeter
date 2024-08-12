@@ -3,6 +3,7 @@ pkgLoad <- function( packages = "requirements" ) {
   if( length( packages ) == 1L && packages == "requirements" ) {
     
     packages <- c( "dplyr", 
+		   "dotenv",
                    "lubridate",
                    "RSQLite",
                    "tidymodels",

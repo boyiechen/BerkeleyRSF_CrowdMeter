@@ -16,7 +16,7 @@ CLIENT_ID = os.getenv("IMGUR_CLIENT_ID")
 
 # Open Weather Service
 OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
-QUERY_CITY = "Taipei,tw"
+QUERY_CITY = "Berkeley,us"
 
 weather_url = f"http://api.openweathermap.org/data/2.5/weather?q={QUERY_CITY}&appid={OPEN_WEATHER_API_KEY}&units=metric"
 
